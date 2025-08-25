@@ -1,24 +1,25 @@
-import pandas as pd
+import pandas as pd 
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
 import joblib
 
-#Load Dataset
+#load dataset
 data = pd.read_csv('data/iris.csv')
 
-#Preprocess the dataset
-X = data.drop('species', axis = 1)
+#preprocess
+
+X = data.drop('species', axis=1)
 y = data['species']
 
-#Split the data into training and test set
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+#split into training and testing 
+X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=0.2, random_state=42)
 
-#Load the saved model
+#load the saved model 
 model = joblib.load('model/iris_model.pkl')
 
-#Make Predictions
+#make the prediction 
 y_pred = model.predict(X_test)
 
-#Evaluate the model
+#evaluate the model
 accuracy = accuracy_score(y_test, y_pred)
 print(f'Model accuracy: {accuracy:.2f}')
